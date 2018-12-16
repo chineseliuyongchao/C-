@@ -68,3 +68,86 @@ typedef struct node//树中每个结点的类型
 }node,*pnode;
 pnode root;//指向树根结点的指针
 ```
+## 树的遍历
+#include<stdio.h>
+#include<stdlib.h>
+//树的孩子表示法
+#define m 3//树的度数
+typedef char datatype;//结点值的类型
+typedef struct node//结点的类型
+{
+	datatype data;
+	struct node *child[m];//指向子女的指针数组
+}node,*tree;
+tree root;
+//树的前序遍历算法
+void preorder(tree p)//P为指向树根结点的指针
+{
+	int i;
+	if(p!=NULL)//树不为空
+	{
+		printf("%c",p->data);//输出根结点的值
+		for(i=0;i<m;i++)//依次递归实现各子树的前序遍历
+		{
+			preorder(p->child[i]);
+		}
+	}
+}
+//树的后序遍历算法
+void postorder(tree p)//p为指向树根节点的指针
+{
+	int i;
+	if(p!=NULL)//树不为空
+	{
+		for(i=0;i<m;i++)//依次递归实现各子树的后序遍历
+		{
+			postorder(p->child[i]);
+		}
+		printf("%c",p->data);//输出根结点的值
+	}
+}
+//按前序遍历顺序建立一棵3度树
+tree createtee()
+{
+	int i;
+	char ch;
+	tree t;
+	if((ch=getchar())=='#')
+	{
+		t=NULL;
+	}
+	else
+	{
+		t=(tree)malloc(sizeof(node));
+		t->data=ch;
+		for(i=0;i<m;i++)
+		{
+			t->child[i]=createtee();
+		}
+	}
+	return t;
+}
+//树的层次遍历算法
+void levelorder(tree t)//t为指向树根结点的指针
+{
+	tree queue[100];//存放等待访问的结点队列
+	int f,r,i;//f，r分别为队头，队尾指针
+	tree p;
+	f=0;
+	r=1;
+	queue[0]=t;
+	while(f<r)//队列不为空
+	{
+		p=queue[f];//访问队头元素
+		f++;
+		printf("%c",p->data);
+		for(i=0;i<m;i++)//将刚被访问的元素是所有子女结点依次进队
+		{
+			if(p->child[i])
+			{
+				queue[r]=p->child[i];
+				r++;
+			}
+		}
+	}
+}
