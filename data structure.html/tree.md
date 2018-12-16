@@ -69,6 +69,7 @@ typedef struct node//树中每个结点的类型
 pnode root;//指向树根结点的指针
 ```
 ## 树的遍历
+```C
 #include<stdio.h>
 #include<stdlib.h>
 //树的孩子表示法
@@ -151,3 +152,4 @@ void levelorder(tree t)//t为指向树根结点的指针
 		}
 	}
 }
+```
