@@ -1,4 +1,4 @@
-+ Animal.h
+* Animal.h
 ```C++
 #pragma once
 #include<iostream>
