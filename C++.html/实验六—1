@@ -1,0 +1,77 @@
+* Animal.h
+```C++
+#pragma once
+#include<iostream>
+using namespace std;
+class Animal
+{
+private:
+public:
+	int age;
+	Animal();
+	~Animal();
+};
+```
+* Animal.cpp
+```C++
+#include "Animal.h"
+Animal::Animal()
+{
+	cout << "Animal的构造函数" << endl;
+}
+Animal::~Animal()
+{
+	cout << "Animal的析构函数" << endl;
+}
+```
+* Dog.h
+```C++
+#pragma once
+#include "Animal.h"
+class Dog :public Animal
+{
+private:
+public:
+	Dog();
+	void SetAge(int n);
+	void print();
+	~Dog();
+};
+```
+* Dog.cpp
+```C++
+#include "dog.h"
+using namespace std;
+Dog::Dog()
+{
+}
+void Dog::SetAge(int a)
+{
+	age = a;
+	cout << "狗子的构造函数" << endl;
+}
+void Dog::print()
+{
+	cout << "狗子的年龄是：" << age << endl;
+}
+Dog::~Dog()
+{
+	cout << "狗子的析构函数" << endl;
+}
+```
+* main.cpp
+```C++
+#include<iostream>
+#include"dog.h"
+using namespace std;
+int main()
+{
+	int age;
+	Dog d;
+	cout << "请输入狗子的年龄" << endl;
+	cin >> age;
+	d.SetAge(age);
+	d.print();
+	return 0;
+}
+```
