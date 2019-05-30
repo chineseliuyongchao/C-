@@ -56,10 +56,14 @@ void function1(int a[1000][6],int left,int right,int num){//通过快速排序�
 		function1(a,i+1,right,num);
 	}
 }
-int function2(int a[1000][6],int n,int num){//按照某一种指标将指标值最大的人群中标号最小的找出来 
+int function2(int a[1000][6],int n,int num,int left){//按照某一种指标将指标值最大的人群中标号最小的找出来 
 	int m=a[n][num],i;
 	for(i=n;i>=0;i--){
-		if(a[i][num]>a[i-1][num]){
+		if(i<left){
+			i++;
+			break;
+		}
+		else if(a[i][num]>a[i-1][num]){
 			break;
 		}
 	}
@@ -86,7 +90,7 @@ int main(){
 	right=n-1;
 	for(int i=0;i<5;i++){
 		function1(a,left,right,i+1);
-		left=function2(a,n-1,i+1);
+		left=function2(a,n-1,i+1,left);
 	}
 	right=function3(a,left,n);
 	if(right==0){
